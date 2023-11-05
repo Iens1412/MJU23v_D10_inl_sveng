@@ -78,17 +78,10 @@
                     }
                     else if (argument.Length == 1)
                     {
-                        Console.Write("Write word to be translated: ");
-                        string word_to_trnslate = Console.ReadLine();
-                        foreach (SweEngGloss gloss in dictionary)
-                        {
-                            if (gloss.word_swe == word_to_trnslate)
-                                Console.WriteLine($"English for {gloss.word_swe} is {gloss.word_eng}");
-                            if (gloss.word_eng == word_to_trnslate)
-                                Console.WriteLine($"Swedish for {gloss.word_eng} is {gloss.word_swe}");
-                        }
+                        translate();
                     }
-                }else if(command == "help")
+                }
+                else if(command == "help")
                 {
                     //NYI: add help commnd and content
                 }
@@ -173,6 +166,19 @@
                     if (gloss.word_swe == argument[1])
                         Console.WriteLine($"English for {gloss.word_swe} is {gloss.word_eng}");
                     if (gloss.word_eng == argument[1])
+                        Console.WriteLine($"Swedish for {gloss.word_eng} is {gloss.word_swe}");
+                }
+            }
+
+            static void translate()
+            {
+                Console.Write("Write word to be translated: ");
+                string word_to_trnslate = Console.ReadLine();
+                foreach (SweEngGloss gloss in dictionary)
+                {
+                    if (gloss.word_swe == word_to_trnslate)
+                        Console.WriteLine($"English for {gloss.word_swe} is {gloss.word_eng}");
+                    if (gloss.word_eng == word_to_trnslate)
                         Console.WriteLine($"Swedish for {gloss.word_eng} is {gloss.word_swe}");
                 }
             }
