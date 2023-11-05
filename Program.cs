@@ -67,18 +67,7 @@
                     }
                     else if (argument.Length == 1)
                     {
-                        Console.Write("Write word in Swedish: ");
-                        string swedish_word = Console.ReadLine();
-                        Console.Write("Write word in English: ");
-                        string english_word = Console.ReadLine();
-                        int index = -1;
-                        for (int i = 0; i < dictionary.Count; i++)
-                        {
-                            SweEngGloss gloss = dictionary[i];
-                            if (gloss.word_swe == swedish_word && gloss.word_eng == english_word)
-                                index = i;
-                        }
-                        dictionary.RemoveAt(index);
+                        delete();
                     }
                 }
                 else if (command == "translate")
@@ -162,6 +151,22 @@
                 {
                     SweEngGloss gloss = dictionary[i];
                     if (gloss.word_swe == argument[1] && gloss.word_eng == argument[2])
+                        index = i;
+                }
+                dictionary.RemoveAt(index);
+            }
+
+            static void delete()
+            {
+                Console.Write("Write word in Swedish: ");
+                string swedish_word = Console.ReadLine();
+                Console.Write("Write word in English: ");
+                string english_word = Console.ReadLine();
+                int index = -1;
+                for (int i = 0; i < dictionary.Count; i++)
+                {
+                    SweEngGloss gloss = dictionary[i];
+                    if (gloss.word_swe == swedish_word && gloss.word_eng == english_word)
                         index = i;
                 }
                 dictionary.RemoveAt(index);
