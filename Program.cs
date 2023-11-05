@@ -96,7 +96,9 @@
             {
                 try
                 {
-                    using (StreamReader reader = new StreamReader(argument[1]))
+                    string path = $"..\\..\\..\\dict\\{argument[1]}";
+
+                    using (StreamReader reader = new StreamReader(path))
                     {
                         dictionary = new List<SweEngGloss>(); // Empty it!
                         string line = reader.ReadLine();
