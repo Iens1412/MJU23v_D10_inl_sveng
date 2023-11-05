@@ -34,29 +34,29 @@
                 {
                     if(argument.Length == 2)
                     {
-                        using (StreamReader sr = new StreamReader(argument[1]))
+                        using (StreamReader reader = new StreamReader(argument[1]))
                         {
                             dictionary = new List<SweEngGloss>(); // Empty it!
-                            string line = sr.ReadLine();
+                            string line = reader.ReadLine();
                             while (line != null)
                             {
                                 SweEngGloss gloss = new SweEngGloss(line);
                                 dictionary.Add(gloss);
-                                line = sr.ReadLine();
+                                line = reader.ReadLine();
                             }
                         }
                     }
                     else if(argument.Length == 1)
                     {
-                        using (StreamReader sr = new StreamReader(defaultFile)) //FIXME: System.IO.FileNotFoundException
+                        using (StreamReader reader = new StreamReader(defaultFile)) //FIXME: System.IO.FileNotFoundException
                         {
                             dictionary = new List<SweEngGloss>(); // Empty it!
-                            string line = sr.ReadLine();
+                            string line = reader.ReadLine();
                             while (line != null)
                             {
                                 SweEngGloss gloss = new SweEngGloss(line);
                                 dictionary.Add(gloss);
-                                line = sr.ReadLine();
+                                line = reader.ReadLine();
                             }
                         }
                     }
@@ -77,10 +77,10 @@
                     else if(argument.Length == 1)
                     {
                         Console.Write("Write word in Swedish: ");
-                        string s = Console.ReadLine();
+                        string swedish_word = Console.ReadLine();
                         Console.Write("Write word in English: ");
-                        string e = Console.ReadLine();
-                        dictionary.Add(new SweEngGloss(s, e));
+                        string english_word = Console.ReadLine();
+                        dictionary.Add(new SweEngGloss(swedish_word, english_word));
                     }
                 }
                 else if (command == "delete") //FIXME: System.ArgumentOutOfRangeException + else if argument == 2
@@ -98,14 +98,14 @@
                     else if (argument.Length == 1)
                     {
                         Console.Write("Write word in Swedish: ");
-                        string s = Console.ReadLine();
+                        string swedish_word = Console.ReadLine();
                         Console.Write("Write word in English: ");
-                        string e = Console.ReadLine();
+                        string english_word = Console.ReadLine();
                         int index = -1;
                         for (int i = 0; i < dictionary.Count; i++)
                         {
                             SweEngGloss gloss = dictionary[i];
-                            if (gloss.word_swe == s && gloss.word_eng == e)
+                            if (gloss.word_swe == swedish_word && gloss.word_eng == english_word)
                                 index = i;
                         }
                         dictionary.RemoveAt(index);
@@ -126,15 +126,18 @@
                     else if (argument.Length == 1)
                     {
                         Console.Write("Write word to be translated: ");
-                        string s = Console.ReadLine();
+                        string word_to_trnslate = Console.ReadLine();
                         foreach (SweEngGloss gloss in dictionary)
                         {
-                            if (gloss.word_swe == s)
+                            if (gloss.word_swe == word_to_trnslate)
                                 Console.WriteLine($"English for {gloss.word_swe} is {gloss.word_eng}");
-                            if (gloss.word_eng == s)
+                            if (gloss.word_eng == word_to_trnslate)
                                 Console.WriteLine($"Swedish for {gloss.word_eng} is {gloss.word_swe}");
                         }
                     }
+                }else if(command == "help")
+                {
+                    //NYI: add help commnd and content
                 }
                 else
                 {
