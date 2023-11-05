@@ -38,17 +38,7 @@
                     }
                     else if(argument.Length == 1)
                     {
-                        using (StreamReader reader = new StreamReader(defaultFile)) //FIXME: System.IO.FileNotFoundException
-                        {
-                            dictionary = new List<SweEngGloss>(); // Empty it!
-                            string line = reader.ReadLine();
-                            while (line != null)
-                            {
-                                SweEngGloss gloss = new SweEngGloss(line);
-                                dictionary.Add(gloss);
-                                line = reader.ReadLine();
-                            }
-                        }
+                        load_dafault(defaultFile);
                     }
                 }
                 else if (command == "list")
@@ -139,6 +129,21 @@
             static void load_file(string[] argument)
             {
                 using (StreamReader reader = new StreamReader(argument[1]))
+                {
+                    dictionary = new List<SweEngGloss>(); // Empty it!
+                    string line = reader.ReadLine();
+                    while (line != null)
+                    {
+                        SweEngGloss gloss = new SweEngGloss(line);
+                        dictionary.Add(gloss);
+                        line = reader.ReadLine();
+                    }
+                }
+            }
+
+            static void load_dafault(string defaultFile)
+            {
+                using (StreamReader reader = new StreamReader(defaultFile)) //FIXME: System.IO.FileNotFoundException
                 {
                     dictionary = new List<SweEngGloss>(); // Empty it!
                     string line = reader.ReadLine();
