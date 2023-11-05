@@ -64,6 +64,9 @@
                     if (argument.Length == 3)
                     {
                         delete_wrod(argument);
+                    }else if(argument.Length == 2)
+                    {
+                        delete_word_two_argument(argument);
                     }
                     else if (argument.Length == 1)
                     {
@@ -202,6 +205,25 @@
                         Console.WriteLine($"English for {gloss.word_swe} is {gloss.word_eng}");
                     if (gloss.word_eng == word_to_trnslate)
                         Console.WriteLine($"Swedish for {gloss.word_eng} is {gloss.word_swe}");
+                }
+            }
+
+            static void delete_word_two_argument(string[] argument)
+            {
+                int index = -1;
+                for (int i = 0; i < dictionary.Count; i++)
+                {
+                    SweEngGloss gloss = dictionary[i];
+                    if (gloss.word_swe == argument[1])
+                        index = i;
+                }
+                if (index != -1)
+                {
+                    dictionary.RemoveAt(index);
+                }
+                else
+                {
+                    Console.WriteLine("this words does not exsist!!!");
                 }
             }
         }
