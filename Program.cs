@@ -56,11 +56,7 @@
                     }
                     else if(argument.Length == 1)
                     {
-                        Console.Write("Write word in Swedish: ");
-                        string swedish_word = Console.ReadLine();
-                        Console.Write("Write word in English: ");
-                        string english_word = Console.ReadLine();
-                        dictionary.Add(new SweEngGloss(swedish_word, english_word));
+                        NewWord();
                     }
                 }
                 else if (command == "delete") //FIXME: System.ArgumentOutOfRangeException + else if argument == 2
@@ -154,6 +150,15 @@
                         line = reader.ReadLine();
                     }
                 }
+            }
+
+            static void NewWord()
+            {
+                Console.Write("Write word in Swedish: ");
+                string swedish_word = Console.ReadLine();
+                Console.Write("Write word in English: ");
+                string english_word = Console.ReadLine();
+                dictionary.Add(new SweEngGloss(swedish_word, english_word));
             }
         }
     }
