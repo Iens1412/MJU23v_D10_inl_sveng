@@ -2,7 +2,7 @@
 {
     internal class Program
     {
-        static List<SweEngGloss> dictionary;
+        static List<SweEngGloss> dictionary = new List<SweEngGloss>();
         class SweEngGloss
         {
             public string word_swe, word_eng;
@@ -28,6 +28,7 @@
                 if (command == "quit")
                 {
                     Console.WriteLine("Goodbye!");
+                    break;
                 }
                 else if (command == "load")
                 {
@@ -47,7 +48,7 @@
                     }
                     else if(argument.Length == 1)
                     {
-                        using (StreamReader sr = new StreamReader(defaultFile))
+                        using (StreamReader sr = new StreamReader(defaultFile)) //FIXME: System.IO.FileNotFoundException
                         {
                             dictionary = new List<SweEngGloss>(); // Empty it!
                             string line = sr.ReadLine();
@@ -67,7 +68,7 @@
                         Console.WriteLine($"{gloss.word_swe,-10}  - {gloss.word_eng,-10}");
                     }
                 }
-                else if (command == "new")
+                else if (command == "new") //TODO: else if argument == 2
                 {
                     if (argument.Length == 3)
                     {
@@ -75,14 +76,14 @@
                     }
                     else if(argument.Length == 1)
                     {
-                        Console.WriteLine("Write word in Swedish: ");
+                        Console.Write("Write word in Swedish: ");
                         string s = Console.ReadLine();
                         Console.Write("Write word in English: ");
                         string e = Console.ReadLine();
                         dictionary.Add(new SweEngGloss(s, e));
                     }
                 }
-                else if (command == "delete")
+                else if (command == "delete") //FIXME: System.ArgumentOutOfRangeException + else if argument == 2
                 {
                     if (argument.Length == 3)
                     {
@@ -96,7 +97,7 @@
                     }
                     else if (argument.Length == 1)
                     {
-                        Console.WriteLine("Write word in Swedish: ");
+                        Console.Write("Write word in Swedish: ");
                         string s = Console.ReadLine();
                         Console.Write("Write word in English: ");
                         string e = Console.ReadLine();
@@ -124,7 +125,7 @@
                     }
                     else if (argument.Length == 1)
                     {
-                        Console.WriteLine("Write word to be translated: ");
+                        Console.Write("Write word to be translated: ");
                         string s = Console.ReadLine();
                         foreach (SweEngGloss gloss in dictionary)
                         {
