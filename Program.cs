@@ -63,13 +63,7 @@
                 {
                     if (argument.Length == 3)
                     {
-                        int index = -1;
-                        for (int i = 0; i < dictionary.Count; i++) {
-                            SweEngGloss gloss = dictionary[i];
-                            if (gloss.word_swe == argument[1] && gloss.word_eng == argument[2])
-                                index = i;
-                        }
-                        dictionary.RemoveAt(index);
+                        delete_wrod(argument);
                     }
                     else if (argument.Length == 1)
                     {
@@ -159,6 +153,18 @@
                 Console.Write("Write word in English: ");
                 string english_word = Console.ReadLine();
                 dictionary.Add(new SweEngGloss(swedish_word, english_word));
+            }
+
+            static void delete_wrod(string[] argument)
+            {
+                int index = -1;
+                for (int i = 0; i < dictionary.Count; i++)
+                {
+                    SweEngGloss gloss = dictionary[i];
+                    if (gloss.word_swe == argument[1] && gloss.word_eng == argument[2])
+                        index = i;
+                }
+                dictionary.RemoveAt(index);
             }
         }
     }
