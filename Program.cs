@@ -48,7 +48,7 @@
                         Console.WriteLine($"{gloss.word_swe,-10}  - {gloss.word_eng,-10}");
                     }
                 }
-                else if (command == "new") //TODO: else if argument == 2
+                else if (command == "new") 
                 {
                     if (argument.Length == 3)
                     {
@@ -59,7 +59,7 @@
                         NewWord();
                     }
                 }
-                else if (command == "delete") //FIXME: System.ArgumentOutOfRangeException + else if argument == 2
+                else if (command == "delete") //FIXME: System.ArgumentOutOfRangeException 
                 {
                     if (argument.Length == 3)
                     {
@@ -94,17 +94,21 @@
 
             static void load_file(string[] argument)
             {
-                using (StreamReader reader = new StreamReader(argument[1]))
+                try
                 {
-                    dictionary = new List<SweEngGloss>(); // Empty it!
-                    string line = reader.ReadLine();
-                    while (line != null)
+                    using (StreamReader reader = new StreamReader(argument[1]))
                     {
-                        SweEngGloss gloss = new SweEngGloss(line);
-                        dictionary.Add(gloss);
-                        line = reader.ReadLine();
+                        dictionary = new List<SweEngGloss>(); // Empty it!
+                        string line = reader.ReadLine();
+                        while (line != null)
+                        {
+                            SweEngGloss gloss = new SweEngGloss(line);
+                            dictionary.Add(gloss);
+                            line = reader.ReadLine();
+                        }
                     }
-                }
+                } catch (FileNotFoundException e) { Console.WriteLine("File Not Found??"); }
+                
             }
 
             static void load_dafault(string defaultFile)
