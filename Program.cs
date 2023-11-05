@@ -34,17 +34,7 @@
                 {
                     if(argument.Length == 2)
                     {
-                        using (StreamReader reader = new StreamReader(argument[1]))
-                        {
-                            dictionary = new List<SweEngGloss>(); // Empty it!
-                            string line = reader.ReadLine();
-                            while (line != null)
-                            {
-                                SweEngGloss gloss = new SweEngGloss(line);
-                                dictionary.Add(gloss);
-                                line = reader.ReadLine();
-                            }
-                        }
+                        load_file(argument);
                     }
                     else if(argument.Length == 1)
                     {
@@ -145,6 +135,21 @@
                 }
             }
             while (true);
+
+            static void load_file(string[] argument)
+            {
+                using (StreamReader reader = new StreamReader(argument[1]))
+                {
+                    dictionary = new List<SweEngGloss>(); // Empty it!
+                    string line = reader.ReadLine();
+                    while (line != null)
+                    {
+                        SweEngGloss gloss = new SweEngGloss(line);
+                        dictionary.Add(gloss);
+                        line = reader.ReadLine();
+                    }
+                }
+            }
         }
     }
 }
