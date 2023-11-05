@@ -59,7 +59,7 @@
                         NewWord();
                     }
                 }
-                else if (command == "delete") //FIXME: System.ArgumentOutOfRangeException 
+                else if (command == "delete") 
                 {
                     if (argument.Length == 3)
                     {
@@ -139,6 +139,7 @@
 
             static void delete_wrod(string[] argument)
             {
+
                 int index = -1;
                 for (int i = 0; i < dictionary.Count; i++)
                 {
@@ -146,7 +147,15 @@
                     if (gloss.word_swe == argument[1] && gloss.word_eng == argument[2])
                         index = i;
                 }
-                dictionary.RemoveAt(index);
+                if (index != -1)
+                {
+                    dictionary.RemoveAt(index);
+                }
+                else
+                {
+                    Console.WriteLine("this words does not exsist!!!");
+                }
+
             }
 
             static void delete()
@@ -162,7 +171,14 @@
                     if (gloss.word_swe == swedish_word && gloss.word_eng == english_word)
                         index = i;
                 }
-                dictionary.RemoveAt(index);
+                if (index != -1)
+                {
+                    dictionary.RemoveAt(index);
+                }
+                else
+                {
+                    Console.WriteLine("this words does not exsist!!!");
+                }
             }
 
             static void translate_word(string[] argument)
