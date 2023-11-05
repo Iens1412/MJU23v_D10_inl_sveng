@@ -19,7 +19,7 @@
         static void Main(string[] args)
         {
             string defaultFile = "..\\..\\..\\dict\\sweeng.lis";
-            Console.WriteLine("Welcome to the dictionary app!");
+            Console.WriteLine("Welcome to the dictionary app!\n write 'help' if you need it!");
             do
             {
                 Console.Write("> ");
@@ -86,7 +86,7 @@
                 }
                 else if(command == "help")
                 {
-                    //NYI: add help commnd and content
+                    HELP();
                 }
                 else
                 {
@@ -118,17 +118,22 @@
 
             static void load_dafault(string defaultFile)
             {
-                using (StreamReader reader = new StreamReader(defaultFile)) //FIXME: System.IO.FileNotFoundException
+                try
                 {
-                    dictionary = new List<SweEngGloss>(); // Empty it!
-                    string line = reader.ReadLine();
-                    while (line != null)
+
+
+                    using (StreamReader reader = new StreamReader(defaultFile))
                     {
-                        SweEngGloss gloss = new SweEngGloss(line);
-                        dictionary.Add(gloss);
-                        line = reader.ReadLine();
+                        dictionary = new List<SweEngGloss>(); // Empty it!
+                        string line = reader.ReadLine();
+                        while (line != null)
+                        {
+                            SweEngGloss gloss = new SweEngGloss(line);
+                            dictionary.Add(gloss);
+                            line = reader.ReadLine();
+                        }
                     }
-                }
+                }catch (FileNotFoundException e) { Console.WriteLine("file sweeng.lis does not exsist"); }
             }
 
             static void NewWord()
@@ -225,6 +230,18 @@
                 {
                     Console.WriteLine("this words does not exsist!!!");
                 }
+            }
+
+            static void HELP()
+            {
+                Console.WriteLine("Here you can find all commands!!");
+                Console.WriteLine("command: new            You can add a new swedish word and its translation to english in the list, use command by typing new or new /swedish word/ /english word/ ");
+                Console.WriteLine("command: load           You can load items from a file. by typing 'load' you get the values in the default file. you can type load /file name/ to get value from a the file that you choose and file should exsist in diractory 'dict' in the program diractory");
+                Console.WriteLine("command: list           You can print the words that exsist in the list");
+                Console.WriteLine("command: translate      You can write a word either in swedish or in english and you will get the translation the other language if the word exsist in the list");
+                Console.WriteLine("command: delete         You can delete a word that exsist in the list. you can type 'delete' or delete /swedish or english word/ or delete /swedish word/ /english word/");
+                Console.WriteLine("command: help           Gives you a list of the commands and how to use it");
+                Console.WriteLine("command: quit           To close the program");
             }
         }
     }
