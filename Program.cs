@@ -74,13 +74,7 @@
                 {
                     if (argument.Length == 2)
                     {
-                        foreach(SweEngGloss gloss in dictionary)
-                        {
-                            if (gloss.word_swe == argument[1])
-                                Console.WriteLine($"English for {gloss.word_swe} is {gloss.word_eng}");
-                            if (gloss.word_eng == argument[1])
-                                Console.WriteLine($"Swedish for {gloss.word_eng} is {gloss.word_swe}");
-                        }
+                        translate_word(argument);
                     }
                     else if (argument.Length == 1)
                     {
@@ -170,6 +164,17 @@
                         index = i;
                 }
                 dictionary.RemoveAt(index);
+            }
+
+            static void translate_word(string[] argument)
+            {
+                foreach (SweEngGloss gloss in dictionary)
+                {
+                    if (gloss.word_swe == argument[1])
+                        Console.WriteLine($"English for {gloss.word_swe} is {gloss.word_eng}");
+                    if (gloss.word_eng == argument[1])
+                        Console.WriteLine($"Swedish for {gloss.word_eng} is {gloss.word_swe}");
+                }
             }
         }
     }
